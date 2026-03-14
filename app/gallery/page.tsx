@@ -135,22 +135,17 @@ export default function GalleryPage() {
   const getCoverImage = (item: any) => item.images ? item.images[0] : item.image
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white pb-16 md:pb-0">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
-        {/* Mobile layout */}
-        <div className="md:hidden px-4 py-2 flex items-center justify-between">
-          <div className="flex-shrink-0">
-            <Link href="/">
-              <Image src="/wtlogoltd2.png" alt="Working Together Property Services Logo" width={500} height={500} className="w-auto h-[45px]" priority />
-            </Link>
-          </div>
-          <a href="tel:07595938285" className="flex items-center gap-2 text-blue-900 font-semibold">
+        {/* Mobile: logo + phone only — nav handled by bottom bar */}
+        <div className="md:hidden px-4 py-3 flex items-center justify-between">
+          <Link href="/">
+            <Image src="/wtlogoltd2.png" alt="Working Together Property Services Logo" width={500} height={500} className="w-auto h-[45px]" priority />
+          </Link>
+          <a href="tel:07595938285" className="flex items-center text-blue-900">
             <PhoneIcon className="w-6 h-6 text-green-600" />
           </a>
-        </div>
-        <div className="md:hidden flex justify-center pb-2">
-          <NavBar items={navItems} className="!relative !top-0 !left-0 !-translate-x-0" instanceId="gallery-mobile" />
         </div>
         {/* Desktop layout */}
         <div className="hidden md:flex max-w-[1800px] mx-auto px-4 items-center justify-between relative py-2">

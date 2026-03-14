@@ -76,19 +76,16 @@ export default function Page() {
   }
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen pb-16 md:pb-0">
 
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
-        {/* Mobile: logo + phone icon top row, nav below */}
-        <div className="md:hidden px-4 py-2 flex items-center justify-between">
+        {/* Mobile: logo + phone only — nav handled by bottom bar */}
+        <div className="md:hidden px-4 py-3 flex items-center justify-between">
           <Image src="/wtlogoltd2.png" alt="Working Together Property Services Logo" width={500} height={500} className="w-auto h-[45px]" priority />
           <a href="tel:07595938285" className="flex items-center text-blue-900">
             <PhoneIcon className="w-6 h-6 text-green-600" />
           </a>
-        </div>
-        <div className="md:hidden flex justify-center pb-2">
-          <NavBar items={navItems} className="!relative !top-0 !left-0 !-translate-x-0" instanceId="home-mobile" />
         </div>
         {/* Desktop: logo | centered nav | phone */}
         <div className="hidden md:flex max-w-[1800px] mx-auto px-4 items-center justify-between relative py-2">
@@ -108,7 +105,7 @@ export default function Page() {
       </header>
 
       {/* Hero Section — extra top padding on mobile to clear 2-row header */}
-      <section id="home" className="relative min-h-[520px] md:h-[55vh] md:min-h-[420px] px-4 text-white overflow-hidden flex items-center justify-center pt-36 md:pt-0">
+      <section id="home" className="relative min-h-[520px] md:h-[55vh] md:min-h-[420px] px-4 text-white overflow-hidden flex items-center justify-center pt-20 pb-16 md:pt-0 md:pb-0">
         <div className="absolute inset-0 z-0">
           <motion.div
             className="absolute inset-0 bg-cover bg-center"
