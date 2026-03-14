@@ -137,30 +137,35 @@ export default function GalleryPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-50 py-2">
-        <div className="max-w-[1800px] mx-auto px-4 flex items-center justify-between relative">
-          <div className="flex-shrink-0 -ml-8">
+      <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+        {/* Mobile layout */}
+        <div className="md:hidden px-4 py-2 flex items-center justify-between">
+          <div className="flex-shrink-0">
             <Link href="/">
-              <Image
-                src="/wtlogoltd2.png"
-                alt="Working Together Property Services Logo"
-                width={500}
-                height={500}
-                className="w-auto h-[55px]"
-                priority
-              />
+              <Image src="/wtlogoltd2.png" alt="Working Together Property Services Logo" width={500} height={500} className="w-auto h-[45px]" priority />
+            </Link>
+          </div>
+          <a href="tel:07595938285" className="flex items-center gap-2 text-blue-900 font-semibold">
+            <PhoneIcon className="w-6 h-6 text-green-600" />
+          </a>
+        </div>
+        <div className="md:hidden flex justify-center pb-2">
+          <NavBar items={navItems} className="!relative !top-0 !left-0 !-translate-x-0" instanceId="gallery-mobile" />
+        </div>
+        {/* Desktop layout */}
+        <div className="hidden md:flex max-w-[1800px] mx-auto px-4 items-center justify-between relative py-2">
+          <div className="flex-shrink-0 -ml-4">
+            <Link href="/">
+              <Image src="/wtlogoltd2.png" alt="Working Together Property Services Logo" width={500} height={500} className="w-auto h-[68px]" priority />
             </Link>
           </div>
           <div className="absolute left-1/2 -translate-x-1/2 z-50">
-            <NavBar items={navItems} className="!relative !top-0 !left-0 !-translate-x-0" />
+            <NavBar items={navItems} className="!relative !top-0 !left-0 !-translate-x-0" instanceId="gallery-desktop" />
           </div>
           <div className="flex-shrink-0 flex items-center gap-2">
-            <a
-              href="tel:07595938285"
-              className="flex items-center gap-2 text-blue-900 font-semibold hover:text-blue-700 transition-colors"
-            >
+            <a href="tel:07595938285" className="flex items-center gap-2 text-blue-900 font-semibold hover:text-blue-700 transition-colors">
               <PhoneIcon className="w-6 h-6 text-green-600" />
-              <span className="hidden md:inline">07595 938285</span>
+              <span>07595 938285</span>
             </a>
           </div>
         </div>
@@ -402,8 +407,13 @@ export default function GalleryPage() {
       <footer className="bg-gray-800 text-white py-12 px-4">
         <div className="max-w-[1700px] mx-auto">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
-            <div>
+            <div className="flex flex-col gap-3">
               <p className="opacity-80">Working Together Property Services Ltd</p>
+              <div className="flex flex-col gap-2 mt-1">
+                <a href="https://www.youtube.com/@workingtogetherps" target="_blank" rel="noopener noreferrer" className="opacity-70 hover:opacity-100 hover:text-red-400 transition-colors text-sm">YouTube</a>
+                <a href="https://www.instagram.com/workingtogetherps/" target="_blank" rel="noopener noreferrer" className="opacity-70 hover:opacity-100 hover:text-pink-400 transition-colors text-sm">Instagram</a>
+                <a href="https://www.tiktok.com/@workingtogetherps" target="_blank" rel="noopener noreferrer" className="opacity-70 hover:opacity-100 hover:text-white transition-colors text-sm">TikTok</a>
+              </div>
             </div>
             <div className="flex flex-col gap-2">
               <Link href="/" className="opacity-80 hover:opacity-100 hover:text-orange-500 transition-colors">Home</Link>
