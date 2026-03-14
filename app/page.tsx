@@ -148,7 +148,7 @@ export default function Page() {
           { id: "wet-rooms", title: "Wet Rooms", summary: "Our speciality. We convert bathrooms into safe, accessible wet rooms , tailored to your needs with 13 years of expertise.", url: "/gallery", image: "/wetroom2pic2.jpg" },
           { id: "bathrooms", title: "Bathrooms", summary: "Full bathroom installations from design to final fit , contemporary or classic, built to suit your style and budget.", url: "/gallery", image: "/bathroompic2.jpg" },
           { id: "kitchens", title: "Kitchens", summary: "Quality kitchen fitting from start to finish , transforming your cooking space with clean, precise workmanship.", url: "/gallery", image: "/kitchen-home.jpg" },
-          { id: "media-walls", title: "Media Walls", summary: "Bespoke media wall installations with integrated fireplaces , a stunning centrepiece for your living room.", url: "/gallery", image: "/MEDIAWALL1.jpg" },
+          { id: "media-walls", title: "Media Walls", summary: "Bespoke media wall installations with integrated fireplaces , a stunning centrepiece for your living room.", url: "/gallery", image: "/mediawall1.jpg" },
         ]}
       />
 
