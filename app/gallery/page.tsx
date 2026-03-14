@@ -195,7 +195,7 @@ export default function GalleryPage() {
             Our Work
           </h1>
           <p className="text-xl md:text-2xl font-medium text-blue-100">
-            Every project tells a story. Here's what happens when craftsmanship meets genuine care for people.
+            Every project tells a story. Here&apos;s what happens when craftsmanship meets genuine care for people.
           </p>
         </motion.div>
       </section>

@@ -180,8 +180,8 @@ export default function AboutPage() {
                   </p>
                   <p>
                     So we built something better. Working Together Property Services Ltd was created with one primary
-                    focus: the customer. We go the extra mile to make our clients' lives easier and better, because
-                    that's what this business was always meant to be about.
+                    focus: the customer. We go the extra mile to make our clients&apos; lives easier and better, because
+                    that&apos;s what this business was always meant to be about.
                   </p>
                   <p>
                     We are especially passionate about helping older people and those with mobility issues. Our core
