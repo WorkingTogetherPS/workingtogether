@@ -108,12 +108,20 @@ export default function Page() {
       <section id="home" className="relative min-h-[520px] md:h-[55vh] md:min-h-[420px] px-4 text-white overflow-hidden flex items-center justify-center pt-20 pb-16 md:pt-0 md:pb-0">
         <div className="absolute inset-0 z-0">
           <motion.div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('/bathroom-hero.jpg')", filter: "blur(3px)" }}
+            className="absolute inset-0"
             initial={{ scale: 1.1 }}
             animate={{ scale: 1.15 }}
             transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-          />
+          >
+            <Image
+              src="/bathroom-hero.jpg"
+              alt=""
+              fill
+              priority
+              className="object-cover object-center"
+              style={{ filter: "blur(3px)" }}
+            />
+          </motion.div>
           <div className="absolute inset-0 bg-blue-900/60" />
         </div>
         <motion.div
@@ -251,6 +259,65 @@ export default function Page() {
             </div>
           ))}
         </InfiniteSlider>
+      </section>
+
+      {/* Recent Work Section */}
+      <section className="py-12 md:py-20 px-4 bg-white">
+        <div className="max-w-[1700px] mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-10 md:mb-14"
+          >
+            <p className="text-sm uppercase tracking-widest text-green-600 font-semibold mb-2">Fresh Off The Tools</p>
+            <h2 className="text-2xl md:text-5xl font-extrabold text-blue-900 mb-3">Recent Work</h2>
+            <p className="text-base md:text-xl text-gray-600 max-w-2xl mx-auto">A look at what we&apos;ve been working on lately.</p>
+          </motion.div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+            {[
+              { src: "/mediawall2pic1.jpg", category: "Media Walls", title: "Media Wall Installation" },
+              { src: "/mediawall1pic1.jpg", category: "Media Walls", title: "Media Wall Installation" },
+              { src: "/wetroompic1.jpg", category: "Wet Rooms", title: "Wet Room Installation" },
+              { src: "/wetroompic4.jpg", category: "Wet Rooms", title: "Wet Room Installation" },
+            ].map((item, index) => (
+              <motion.a
+                key={index}
+                href="/gallery"
+                initial={{ opacity: 0, scale: 0.96 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: index * 0.08 }}
+                viewport={{ once: true }}
+                className="group relative rounded-2xl overflow-hidden shadow-md aspect-[4/3] block"
+              >
+                <img
+                  src={item.src}
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 via-blue-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute top-4 left-4">
+                  <span className="bg-white/90 text-blue-900 text-xs font-bold uppercase tracking-wide px-3 py-1 rounded-full">
+                    {item.category}
+                  </span>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                  <h3 className="text-white font-bold text-lg">{item.title}</h3>
+                </div>
+              </motion.a>
+            ))}
+          </div>
+          <div className="text-center mt-8 md:mt-10">
+            <a
+              href="/gallery"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-blue-900 text-white rounded-lg font-semibold hover:bg-blue-800 transition-all hover:-translate-y-1 hover:shadow-xl"
+            >
+              View All Our Work
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
       </section>
 
       {/* Booking Section */}

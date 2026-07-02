@@ -44,6 +44,22 @@ export default function GalleryPage() {
       description: "Stunning media wall feature creating a modern entertainment centrepiece.",
     },
     {
+      id: 11,
+      category: "media-walls",
+      title: "Media Wall Installation",
+      image: "/mediawall1pic1.jpg",
+      video: "/mediawall1video.mov",
+      description: "Bespoke media wall installation with clean finishing and modern design.",
+    },
+    {
+      id: 12,
+      category: "media-walls",
+      title: "Media Wall Installation",
+      images: ["/mediawall2pic1.jpg", "/mediawall2pic2.jpg", "/mediawall2pic3.jpg"],
+      video: "/mediawall2video.mov",
+      description: "Full media wall build with seamless integration and premium finish throughout.",
+    },
+    {
       id: 3,
       category: "bathrooms",
       title: "Bathroom Renovation",
@@ -119,20 +135,28 @@ export default function GalleryPage() {
   }
 
   const nextImage = () => {
-    if (currentProject?.images) {
-      setCurrentImageIndex((prev) => (prev + 1) % currentProject.images.length)
+    if (currentProject) {
+      const total = getMediaItems(currentProject).length
+      setCurrentImageIndex((prev) => (prev + 1) % total)
     }
   }
 
   const prevImage = () => {
-    if (currentProject?.images) {
-      setCurrentImageIndex((prev) =>
-        prev === 0 ? currentProject.images.length - 1 : prev - 1
-      )
+    if (currentProject) {
+      const total = getMediaItems(currentProject).length
+      setCurrentImageIndex((prev) => (prev === 0 ? total - 1 : prev - 1))
     }
   }
 
   const getCoverImage = (item: any) => item.images ? item.images[0] : item.image
+
+  const getMediaItems = (item: any) => {
+    const items: { type: "image" | "video"; src: string }[] = []
+    if (item.images) item.images.forEach((src: string) => items.push({ type: "image", src }))
+    else if (item.image) items.push({ type: "image", src: item.image })
+    if (item.video) items.push({ type: "video", src: item.video })
+    return items
+  }
 
   return (
     <main className="min-h-screen bg-white pb-16 md:pb-0">
@@ -253,12 +277,19 @@ export default function GalleryPage() {
                     </span>
                   </div>
 
-                  {/* Multi-image badge */}
-                  {item.images && (
-                    <div className="absolute top-4 right-4">
-                      <span className="bg-blue-900/80 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                        {item.images.length} photos
-                      </span>
+                  {/* Multi-image / video badge */}
+                  {(item.images || item.video) && (
+                    <div className="absolute top-4 right-4 flex flex-col gap-1 items-end">
+                      {item.images && (
+                        <span className="bg-blue-900/80 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                          {item.images.length} photos
+                        </span>
+                      )}
+                      {item.video && (
+                        <span className="bg-black/70 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                          ▶ Video
+                        </span>
+                      )}
                     </div>
                   )}
 
@@ -337,7 +368,7 @@ export default function GalleryPage() {
             </button>
 
             {/* Prev / Next */}
-            {currentProject.images && currentProject.images.length > 1 && (
+            {getMediaItems(currentProject).length > 1 && (
               <>
                 <button
                   onClick={(e) => { e.stopPropagation(); prevImage() }}
@@ -354,41 +385,65 @@ export default function GalleryPage() {
               </>
             )}
 
-            {/* Image */}
+            {/* Media */}
             <div
               className="relative max-w-6xl w-full px-4 sm:px-12 md:px-20"
               onClick={(e) => e.stopPropagation()}
             >
-              <motion.img
-                key={currentImageIndex}
-                initial={{ opacity: 0, scale: 0.97 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.2 }}
-                src={currentProject.images ? currentProject.images[currentImageIndex] : currentProject.image}
-                alt={currentProject.title}
-                className="max-h-[80vh] w-full object-contain mx-auto rounded-lg"
-              />
+              {(() => {
+                const mediaItems = getMediaItems(currentProject)
+                const current = mediaItems[currentImageIndex]
+                return current?.type === "video" ? (
+                  <motion.video
+                    key={currentImageIndex}
+                    initial={{ opacity: 0, scale: 0.97 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.2 }}
+                    src={current.src}
+                    className="max-h-[80vh] w-full object-contain mx-auto rounded-lg"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    controls
+                  />
+                ) : (
+                  <motion.img
+                    key={currentImageIndex}
+                    initial={{ opacity: 0, scale: 0.97 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.2 }}
+                    src={current?.src}
+                    alt={currentProject.title}
+                    className="max-h-[80vh] w-full object-contain mx-auto rounded-lg"
+                  />
+                )
+              })()}
               <div className="text-center mt-5">
                 <h3 className="text-white font-bold text-xl">{currentProject.title}</h3>
-                {currentProject.images && (
+                {getMediaItems(currentProject).length > 1 && (
                   <p className="text-gray-400 text-sm mt-1">
-                    {currentImageIndex + 1} / {currentProject.images.length}
+                    {currentImageIndex + 1} / {getMediaItems(currentProject).length}
                   </p>
                 )}
               </div>
 
-              {/* Thumbnail strip for multi-image */}
-              {currentProject.images && currentProject.images.length > 1 && (
+              {/* Thumbnail strip */}
+              {getMediaItems(currentProject).length > 1 && (
                 <div className="flex gap-2 justify-center mt-4">
-                  {currentProject.images.map((img: string, idx: number) => (
+                  {getMediaItems(currentProject).map((media, idx) => (
                     <button
                       key={idx}
                       onClick={() => setCurrentImageIndex(idx)}
-                      className={`w-14 h-10 rounded overflow-hidden border-2 transition-all ${
+                      className={`w-14 h-10 rounded overflow-hidden border-2 transition-all flex items-center justify-center bg-gray-800 ${
                         idx === currentImageIndex ? "border-white" : "border-transparent opacity-50 hover:opacity-80"
                       }`}
                     >
-                      <img src={img} alt="" className="w-full h-full object-cover" />
+                      {media.type === "video" ? (
+                        <span className="text-white text-lg">▶</span>
+                      ) : (
+                        <img src={media.src} alt="" className="w-full h-full object-cover" />
+                      )}
                     </button>
                   ))}
                 </div>
