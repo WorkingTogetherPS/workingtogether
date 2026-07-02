@@ -196,7 +196,7 @@ export default function Page() {
               viewport={{ once: true, amount: 0.3 }}
               className="aspect-[4/5] md:aspect-[4/5] max-h-[400px] md:max-h-none rounded-lg overflow-hidden relative"
             >
-              <Image src="/paulworking1.png" alt="Paul Working" width={1600} height={1200} quality={100} className="w-full h-full object-cover object-[center_65%]" />
+              <Image src="/PAULWORKING1_upscaled.png" alt="Paul Working" width={1600} height={1200} quality={100} className="w-full h-full object-cover object-[center_65%]" />
             </motion.div>
           </div>
         </div>
